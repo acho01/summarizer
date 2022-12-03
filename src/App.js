@@ -14,6 +14,11 @@ function App() {
 
   const openai = new OpenAIApi(configuration);
 
+  const getValidLengthText = (text) => {
+    const validLength = 4*3500;
+    return text.substr(0, validLength)
+  }
+
   async function getCurrentTabHtml() {
     let queryOptions = { active: true, currentWindow: true };
     const tabs = await chrome.tabs.query(queryOptions);
@@ -36,11 +41,13 @@ function App() {
 
     // Get and parse inner html of active tab
     const tabInnerHtmlText = await getCurrentTabHtml();
+    const validPrompt = getValidLengthText(tabInnerHtmlText)
+
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Create short summary of the following text: \\n\\n ${tabInnerHtmlText}`,
+      prompt: `Create detailed summary of the following text: \n\n ${validPrompt}`,
       temperature: 0.7,
-      max_tokens: 64,
+      max_tokens: 300,
       top_p: 1.0,
       frequency_penalty: 0.0,
       presence_penalty: 0.0,
@@ -104,7 +111,7 @@ function App() {
           fontSize: 12,
           fontWeight: "500",
           color: "#212429",
-          textAlign: "center",
+          textAlign: "justify",
           marginTop: "20px",
         }}
       >
