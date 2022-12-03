@@ -1,6 +1,6 @@
 # Summarizer
 
-Summarizer is GPT-3 based simple chrome extension which enables to provide short summaries for any web site which is currently opened in a tab.
+Summarizer is GPT-3 AI based simple chrome extension which enables to provide short summaries for any web site which is currently opened in a tab.
 
 ## Setup
 - run **npm run build**
