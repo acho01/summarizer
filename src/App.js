@@ -15,7 +15,7 @@ function App() {
   const openai = new OpenAIApi(configuration);
 
   const getValidLengthText = (text) => {
-    const validLength = 4*3500;
+    const validLength = 4*3200;
     return text.substr(0, validLength)
   }
 
